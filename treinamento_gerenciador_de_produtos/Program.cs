@@ -21,12 +21,13 @@ namespace treinamento_gerenciador_de_produtos
             //program loop
             while (working)
             {
-                Menu();
-                working = Control();
+                Menu(); //Whats is going to be shown
+                working = Control(); //input from the user
+                Console.Clear();
             }
             //end of program loop
         }
-
+ 
         static void Menu()
         {
             Console.WriteLine("Options: <add> <remove> <edit> <show> <show_all> <quit>");
