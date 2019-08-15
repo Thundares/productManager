@@ -25,8 +25,7 @@ namespace treinamento_gerenciador_de_produtos
             while (working)
             {
                 Menu(); //Whats is going to be shown
-                //working = Control(Lista); //input from the user
-                Test(Lista, id); // Made to test the lastest function implemented
+                working = Control(Lista, id); //input from the user
                 Console.Clear();
             }
             //end of program loop
@@ -37,48 +36,13 @@ namespace treinamento_gerenciador_de_produtos
             Console.WriteLine("Options: <add> <remove> <edit> <show> <show_all> <quit>");
         }
 
-        static bool Control(List<Product> lista)
+        static bool Control(List<Product> lista, ushort[] id)
         {
             string input = Console.ReadLine();
             if (input == Anwser.add.ToString())
             {
-                Console.WriteLine("caso add");
-            }
-            else if (input == Anwser.remove.ToString())
-            {
-                Console.WriteLine("caso remove");
-            }
-            else if (input == Anwser.edit.ToString())
-            {
-                Console.WriteLine("caso edit");
-            }
-            else if (input == Anwser.show.ToString())
-            {
-                Console.WriteLine("caso show");
-            }
-            else if (input == Anwser.show_all.ToString())
-            {
-                Console.WriteLine("caso show all");
-            }
-            else if (input == Anwser.quit.ToString())
-            {
-                return false;
-            }
-            else
-            {
-                Console.Write("<{0}> is not a operational function.", input);
-                Console.WriteLine("To leave this programm type <quit>");
-            }
-            return true;
-        }
-
-        static void Test(List<Product> lista, ushort[] id)
-        {
-            string input = Console.ReadLine();
-            if (input == Anwser.add.ToString())
-            {
-                Console.WriteLine("caso add");
-                Console.WriteLine("Forneça, ao menos o Nome (opcional Quantidade e Preço)");
+               // Console.WriteLine("caso add");
+                Console.WriteLine("Type the Name of the Product(optional: Quantity and Price)");
                 string[] input2 = Console.ReadLine().Split(" ");
 
                 if (input2.Length == 3)
@@ -95,12 +59,28 @@ namespace treinamento_gerenciador_de_produtos
                     {
                         Product temp = new Product(id[0]++, input2[0]);
                         lista.Add(temp);
+                        
                     }
 
             }
             else if (input == Anwser.remove.ToString())
             {
-                Console.WriteLine("caso remove");
+               // Console.WriteLine("caso remove");
+                Console.WriteLine("Type the name of the Product to remove");
+                string input2 = Console.ReadLine();
+                Product temp = null;
+                foreach(Product obj in lista)
+                {
+                    if(obj.Name == input2)
+                    {
+                        temp = obj;
+                    }
+                } 
+                if(temp != null){
+                    lista.Remove(temp);
+                    Console.WriteLine("Product was removed successfully");
+                    Console.Read();
+                }
             }
             else if (input == Anwser.edit.ToString())
             {
@@ -108,16 +88,26 @@ namespace treinamento_gerenciador_de_produtos
             }
             else if (input == Anwser.show.ToString())
             {
-                Console.WriteLine("caso show");
+             //   Console.WriteLine("caso show");
+                Console.WriteLine("Type the name of the Product to show");
+                string input2 = Console.ReadLine();
+
+                foreach(Product obj in lista)
+                    if(obj.Name == input2)
+                    {
+                        Console.WriteLine(obj);
+                    }
+                Console.Read();
             }
+
             else if (input == Anwser.show_all.ToString())
             {
-                Console.WriteLine("caso show all");
+               // Console.WriteLine("caso show all");
                 foreach(Product o in lista)
                     Console.WriteLine(o);
                 Console.ReadLine();
             }
-          /*  else if (input == Anwser.quit.ToString())
+            else if (input == Anwser.quit.ToString())
             {
                 return false;
             }
@@ -126,8 +116,7 @@ namespace treinamento_gerenciador_de_produtos
                 Console.Write("<{0}> is not a operational function.", input);
                 Console.WriteLine("To leave this programm type <quit>");
             }
-            return true; */
+            return true;
         }
     }
 }
-
