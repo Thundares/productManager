@@ -81,10 +81,52 @@ namespace treinamento_gerenciador_de_produtos
                     Console.WriteLine("Product was removed successfully");
                     Console.Read();
                 }
+                else
+                    Console.WriteLine("Product not found");
             }
             else if (input == Anwser.edit.ToString())
             {
-                Console.WriteLine("caso edit");
+                //Console.WriteLine("caso edit");
+                Console.WriteLine("Type the name of the Product that will be modified");
+                string input2 = Console.ReadLine();
+                Product temp = null;
+                foreach(Product obj in lista)
+                {
+                    if(obj.Name == input2)
+                    {
+                        temp = obj;
+                    }
+                } 
+                if(temp != null){
+                    bool editing = true;
+                    while(editing){
+                        Console.WriteLine("Do you want to edit <p>rice or <q>uantity?");
+                        input2 = Console.ReadLine();
+                        if(input2 == "p")
+                        {
+                            Console.WriteLine("How much will you change?");
+                            float change = float.Parse(Console.ReadLine());
+                            temp.Price = change;
+                            editing = false;
+                        }
+                        else if(input2 == "q")
+                        {
+                            Console.WriteLine("How much will you change?");
+                            int change = int.Parse(Console.ReadLine());
+                            if(change >= 0)
+                            {
+                                temp.Add((ushort)change);
+                                editing = false;
+                            }
+                            else
+                            {
+                                change *= -1; 
+                                temp.Remove((ushort)change);
+                                editing = false;
+                            }
+                        }
+                    }
+                }
             }
             else if (input == Anwser.show.ToString())
             {
